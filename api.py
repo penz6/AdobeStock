@@ -1,8 +1,8 @@
 # import
 import json
-
+from key import apikey
 import requests
-from requests.auth import HTTPBasicAuth
+
 
 
 def api(query):
@@ -12,7 +12,7 @@ def api(query):
     # Define the headers
     headers = {
         # super secret
-        'x-api-key': '7f9388738de34185822e3f5c2f2ee2be',
+        'x-api-key': apikey,
         'x-product': 'MySampleApp',
     }
 
@@ -20,11 +20,12 @@ def api(query):
     params = {
         # us market
         'locale': 'en_US',
-        #filter premium(need to work on this one
-        'search_parameters[premium]': 'true ',
+        # filter premium(need to work on this one
+        'search_parameters[filters][premium]': 'true',
         # search for dogs
         'search_parameters[words]': query,
-        'result_columns[]': ['title','premium_level_id'],
+        'result_columns[]': ['title', 'premium_level_id', 'is_premium'],
+        'search_parameters[limit]': 100,
     }
 
     # Send the request

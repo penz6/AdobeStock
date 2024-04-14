@@ -9,14 +9,17 @@ import pandas as pd
 
 def main():
     print("hello")
-    # example traning query
-    data = api("dogs")
-    print(data)
-    #get data into data frame
-    df = pd.json_normalize(data['files'],max_level=0)
-    print(df)
+    #data frame
+    df = pd.DataFrame()
+    # offset
+    for i in range(0,5000,100):
+        data = api("dogs",i)
+        print(data)
+        #get data into data frame
+        dftemp = pd.json_normalize(data['files'],max_level=0)
+        df = pd.concat([df,dftemp])
     # save data to file
-    pd.DataFrame.to_csv(df,"Traning")
+    pd.DataFrame.to_csv(df,"Training.csv")
 
 
 

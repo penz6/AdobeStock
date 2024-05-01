@@ -5,7 +5,7 @@ import requests
 
 
 
-def api(query,offset):
+def api(query,offset,premium):
     # Stock API
     url = "https://stock.adobe.io/Rest/Media/1/Search/Files"
 
@@ -30,6 +30,7 @@ def api(query,offset):
         'search_parameters[filters][content_type:illustration]':'true',
         #offset
         'search_parameters[offset]':offset,
+        'search_parameters[filters][premium]':premium
     }
 
     # Send the request
